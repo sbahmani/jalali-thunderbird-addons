@@ -1,0 +1,34 @@
+[
+  {
+    "namespace": "IranianDateColumn",
+    "functions": [
+      {
+        "name": "register",
+        "type": "function",
+        "async": true,
+        "description": "Registers the Jalali date column in the thread pane (idempotent).",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "any",
+            "optional": true,
+            "description": "Formatting options: monthStyle, weekDayStyle, numbersStyle."
+          }
+        ]
+      },
+      {
+        "name": "setOptions",
+        "type": "function",
+        "async": true,
+        "description": "Updates formatting options and refreshes the column.",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "any",
+            "description": "Formatting options: monthStyle, weekDayStyle, numbersStyle."
+          }
+        ]
+      }
+    ]
+  }
+]

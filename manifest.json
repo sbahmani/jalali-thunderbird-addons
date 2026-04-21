@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Iranian Date For Thunderbird",
+  "version": "2.0.1",
+  "description": "Adds a Jalali (Persian) date column to the message list and Jalali in the message header.",
+  "author": "SjB",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "iraniandate@pouria.p",
+      "strict_min_version": "115.0"
+    }
+  },
+  "permissions": ["storage"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  },
+  "experiment_apis": {
+    "IranianDateColumn": {
+      "schema": "api/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["IranianDateColumn"]],
+        "script": "api/parent.js"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Iranian Date</title>
+  </head>
+  <body>
+    <form id="opts">
+      <p>
+        <label for="monthStyle">Month style</label><br />
+        <select id="monthStyle" name="monthStyle">
+          <option value="2-digit">Month number</option>
+          <option value="long">Month name</option>
+        </select>
+      </p>
+      <p>
+        <label for="weekDayStyle">Weekday</label><br />
+        <select id="weekDayStyle" name="weekDayStyle">
+          <option value="hidden">Hide</option>
+          <option value="long">Show</option>
+        </select>
+      </p>
+      <p>
+        <label for="numbersStyle">Digits</label><br />
+        <select id="numbersStyle" name="numbersStyle">
+          <option value="arabext">Persian (۰–۹)</option>
+          <option value="latn">Western (0–9)</option>
+        </select>
+      </p>
+    </form>
+    <script src="options.js"></script>
+  </body>
+</html>

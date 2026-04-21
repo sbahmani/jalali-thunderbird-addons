@@ -1,0 +1,3 @@
+content    iraniandate    chrome/content/
+
+overlay chrome://messenger/content/messenger.xul chrome://iraniandate/content/main_overlay.xul
