@@ -1,0 +1,22 @@
+# web-ext (https://github.com/mozilla/web-ext)
+web-ext-artifacts/
+
+# Node (local tooling, npx caches)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Stray installable packages at repo root (builds go under web-ext-artifacts/)
+*.xpi
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+*.swp
+*.swo
+*~
+.idea/

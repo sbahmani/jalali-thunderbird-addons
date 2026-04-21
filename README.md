@@ -53,13 +53,55 @@ web-ext run -t thunderbird
 
 ## Development
 
-```bash
-# From repository root (expect warnings for privileged experiments)
-web-ext lint
+### Prerequisites
 
-# Unsigned XPI (default output under web-ext-artifacts/)
+- **Node.js** (LTS is fine) so you can run [web-ext](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/).
+
+Install web-ext globally once, or use `npx` without installing:
+
+```bash
+npm install -g web-ext
+```
+
+### Lint
+
+From the repository root (expect warnings for privileged experiments):
+
+```bash
+web-ext lint
+```
+
+### Build the package (`.xpi` / installable ZIP)
+
+Thunderbird installs a **ZIP** of the extension tree; the usual convention is to name that file **`.xpi`**, but **`.zip` and `.xpi` are the same format** — you can install either from **Install Add-on From File…**.
+
+From the repository root:
+
+```bash
 web-ext build
 ```
+
+By default, web-ext writes:
+
+- **Directory:** `web-ext-artifacts/` (next to `manifest.json`)
+- **File name:** a slug derived from the project plus the manifest **version**, e.g. `iranian_date_for_thunderbird-2.0.1.zip`
+
+To emit an explicit **`.xpi`** name and overwrite on repeat builds:
+
+```bash
+web-ext build --filename iranian-date-for-thunderbird.xpi --overwrite-dest
+```
+
+Other useful flags:
+
+| Flag | Purpose |
+| ---- | ------- |
+| `--artifacts-dir <dir>` | Put the artifact somewhere other than `web-ext-artifacts/` |
+| `--source-dir <dir>` | Build from another folder (default is current directory) |
+
+Then install the produced file as in [Install](#install) → *From a built package*.
+
+---
 
 The add-on uses a **privileged experiment** (`experiment_apis.IranianDateColumn`) because the thread pane column API is not available to pure WebExtensions yet. Review `api/schema.json` and `api/parent.js` for the surface exposed to the background script.
 
