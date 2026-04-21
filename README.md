@@ -1,6 +1,6 @@
 # Iranian Date for Thunderbird
 
-Thunderbird **MailExtension** (115+) that shows **Jalali (Persian / Solar Hijri)** dates alongside the normal UI: a dedicated column in the **table** message list and a line in the **opened message** header.
+Thunderbird **MailExtension** (140+) that shows **Jalali (Persian / Solar Hijri)** dates alongside the normal UI: a dedicated column in the **table** message list and a line in the **opened message** header.
 
 **Author:** SjB
 
@@ -28,7 +28,7 @@ Thunderbird **MailExtension** (115+) that shows **Jalali (Persian / Solar Hijri)
 
 ## Requirements
 
-- **Thunderbird** 115.0 or newer  
+- **Thunderbird** 140.0 or newer (manifest uses `data_collection_permissions`, which current [addons-linter](https://github.com/mozilla/addons-linter) only accepts together with a minimum Gecko that supports that key; older Thunderbird releases can keep using **2.0.x** builds if you still need them.)
 - **Layout:** Jalali in the thread list is provided via a **custom column** — use **table view** and enable the column from the thread pane column picker. Card view is not modified by this add-on.
 
 ---
@@ -65,11 +65,13 @@ npm install -g web-ext
 
 ### Lint
 
-From the repository root (expect warnings for privileged experiments):
+From the repository root:
 
 ```bash
 web-ext lint
 ```
+
+The repo includes **`web-ext-config.mjs`**, which sets **`lint.privileged: true`** for [web-ext](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/). That matches how [addons-linter](https://github.com/mozilla/addons-linter) validates extensions that use **`experiment_apis`**: the manifest declares **`mozillaAddons`** (required in that mode) and **`browser_specific_settings.gecko.data_collection_permissions`**. Current linter versions also require **`strict_min_version`** high enough that Gecko supports that key (here **140.0**) and **`gecko_android.strict_min_version`** **142.0** so the Android compatibility check passes. Omit the config only if you pass the same flag yourself: `web-ext lint --privileged`.
 
 ### Build the package (`.xpi` / installable ZIP)
 
@@ -84,7 +86,7 @@ web-ext build
 By default, web-ext writes:
 
 - **Directory:** `web-ext-artifacts/` (next to `manifest.json`)
-- **File name:** a slug derived from the project plus the manifest **version**, e.g. `iranian_date_for_thunderbird-2.0.1.zip`
+- **File name:** a slug derived from the project plus the manifest **version**, e.g. `iranian_date_for_thunderbird-2.1.0.zip`
 
 To emit an explicit **`.xpi`** name and overwrite on repeat builds:
 
@@ -111,19 +113,13 @@ The add-on uses a **privileged experiment** (`experiment_apis.IranianDateColumn`
 
 | Path | Role |
 | ---- | ---- |
+| `web-ext-config.mjs` | web-ext defaults (`lint.privileged`) so `web-ext lint` matches experiment add-ons |
 | `manifest.json` | WebExtension manifest (MV2), Gecko id, min TB version |
 | `background.js` | Registers the experiment on install/startup, reads options |
 | `options/` | Options UI (`options.html`, `options.js`) |
 | `api/schema.json` | Experiment API schema |
 | `api/parent.js` | Parent-process implementation: column, message header hooks |
 | `legacy-xul/` | Old XUL-based extension (historical reference only) |
-
----
-
-## Add-on ID
-
-Gecko application ID: **`iraniandate@pouria.p`** (unchanged for upgrade continuity).  
-Displayed author in `manifest.json` is **SjB**.
 
 ---
 
